@@ -1,0 +1,11 @@
+.headerNav {
+    display: block;
+    padding: 0;
+    overflow: hidden;
+    outline: none;
+    text-decoration: none;
+    border: 1px solid transparent;
+    background: none;
+    height: 44px;
+    margin-left: -1px;
+}
