@@ -127,36 +127,21 @@ class ConversorController extends Controller
     }
 
 
-
-
-
-
     public function realRomanoMilharA($real)
     {
         $nRom = '';
         $milhar = intdiv($real, 1000);
 
 
-//        if ($milhar > 0){
-//            for ($i = 1; $i <= $milhar; $i++) {
-//                $nRom = $nRom.'M';
-//            }
-//        }
-
-//        $realMod = ($real % 1000);
-//        $centena = $this->realRomanoCentena($realMod,$nRom);
 
         $centena = $this->realRomanoCentena($milhar,$nRom);
 
         $numero = intdiv($real, 1000);
-
-
+        
         $cStrings = mb_strlen(trim($centena));
         $realMod = ($real % 1000);
         $centena = $centena.'+';
         $centena2 = $this->realRomanoCentena($realMod,$centena);
-
-
 
         return [$centena2, $cStrings];
     }
@@ -166,13 +151,12 @@ class ConversorController extends Controller
         $nRom = '';
         $milhao = intdiv($real, 1000000);
 
-        
+
         if ($milhao > 0){
             for ($i = 1; $i <= $milhao; $i++) {
                 $nRom = $nRom.'M';
             }
         }
-
 
         $milhar =  ($real % 1000000);;
 
@@ -189,7 +173,6 @@ class ConversorController extends Controller
         $centena2 = $this->realRomanoCentena($realMod,$centena);
 
 
-
         return [$centena2, $cStrings];
     }
 
@@ -199,7 +182,6 @@ class ConversorController extends Controller
 
         $numeral = new NumeroTipo();
         $restr = $numeral->getNumber($numero, $tipo);
-
 
         $ante = $restr['ante'];
         $ante1 = $restr['ante1'];
