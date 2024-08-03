@@ -11,4 +11,5 @@ Route::get('/', function () {
 
 
 Route::get('conversor', [ConversorController::class, 'index'])->name('conversor');
-Route::post('conversor/teste', [ConversorController::class, 'teste'])->name('teste');
+Route::post('conversor/arabicos', [ConversorController::class, 'arabicos'])->name('arabicos');
+Route::post('conversor/romano', [ConversorController::class, 'romano'])->name('romano');

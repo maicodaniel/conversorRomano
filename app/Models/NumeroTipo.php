@@ -46,4 +46,10 @@ class NumeroTipo extends Model
     }
 
 
+    public function getRomano(){
+
+
+    }
+
+
 }

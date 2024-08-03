@@ -12,7 +12,7 @@
     <script src="{{asset('site/bootstrap.js')}}"></script>
 </head>
 <body>
-<main class="container-fluid">
+<main class="container">
 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -51,10 +51,11 @@
             </div>
         </div>
     </nav>
-    <div class="row">
+    <div class="col">
 
 
         @yield('content')
+
     </div>
 
 </main>

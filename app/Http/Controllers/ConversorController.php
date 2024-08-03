@@ -19,7 +19,7 @@ class ConversorController extends Controller
         return view('Conversor.index');
     }
 
-    public function teste(Request $request)
+    public function arabicos(Request $request)
     {
 
         $real = $request->numero;
@@ -47,8 +47,6 @@ class ConversorController extends Controller
         $data['milhar'] = $milhar;
 
         return $data;
-
-
     }
 
 
@@ -64,11 +62,6 @@ class ConversorController extends Controller
 
         $realMod = ($real % 1000);
         $centena = $this->realRomanoCentena($realMod,$nRom);
-
-
-        $numero = intdiv($real, 1000);
-
-
 
         return $centena;
     }
@@ -137,7 +130,7 @@ class ConversorController extends Controller
         $centena = $this->realRomanoCentena($milhar,$nRom);
 
         $numero = intdiv($real, 1000);
-        
+
         $cStrings = mb_strlen(trim($centena));
         $realMod = ($real % 1000);
         $centena = $centena.'+';
@@ -222,5 +215,66 @@ class ConversorController extends Controller
 
         return $base;
     }
+
+
+//    Romanos para arabicos
+
+    public function romano(Request $request)
+    {
+
+        $romanosValor = ['M'=> 1000,  'D'=> 500,  'C'=> 100,  'L'=> 50,  'X'=> 10,  'V'=> 5,  'I'=> 1];
+        $numero = $request->numero;
+        $romano = '';
+        $milhar = $request->milhar;
+
+        $str = str_split($numero);
+        $str1 = array_reverse($str);
+        $strM = str_split($milhar);
+        $strM1 = array_reverse($strM);
+        $soma = 0;
+        $soma1 = 0;
+        $pattern = '/(.)\3+/';
+        $replace = '$1';
+
+//        dd($romanosValor[strtoupper($str[1])]);
+
+
+        for ($i=0; $i < count($strM1); $i++){
+
+            if ($soma > $romanosValor[strtoupper($strM1[$i])]  && $romanosValor[strtoupper($strM1[$i])] < $romanosValor[strtoupper($strM1[$i-1])]){
+                $soma = $soma - $romanosValor[strtoupper($strM1[$i])];
+            }else{
+                $soma = $soma + $romanosValor[strtoupper($strM1[$i])];
+            }
+        }
+
+
+        for ($j=0; $j < count($str1); $j++){
+
+            if ($soma1 > $romanosValor[strtoupper($str1[$j])]  && $romanosValor[strtoupper($str1[$j])] < $romanosValor[strtoupper($str1[$j-1])]){
+                $soma1 = $soma1 - $romanosValor[strtoupper($str1[$j])];
+            }else{
+                $soma1 = $soma1 + $romanosValor[strtoupper($str1[$j])];
+            }
+        }
+
+
+
+
+        $total = ($soma * 1000) + $soma1;
+        $data['status'] = true;
+        $data['romano'] = $romano;
+        $data['total'] = $total;
+
+        return $data;
+
+    }
+
+
+
+
+
+
+
 
 }
