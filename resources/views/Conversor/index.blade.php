@@ -9,7 +9,7 @@
                     <h1>Numeros Arabicos para Romanos</h1>
 
                     <div class="mt-5">
-                        <input id="inputnumeral">
+                        <input id="inputnumeral" type="number" maxlength="7" oninput='validarNumeral()'>
                         <BUTTON type='button' class='btn btn-success btn-cadastrar btn-criar-fatura' onclick='conversao()'>CONVERTER</BUTTON>
                     </div>
 
@@ -61,10 +61,12 @@
         </div>
     </div>
     <script>
-
         function conversao(){
             let numero = $('#inputnumeral').val();
 
+            if (numero.length >7){
+                $('#inputnumeral').val(numero.slice(0, -1) + '');
+            }
             console.log(numero);
 
             $.ajax({
@@ -103,7 +105,6 @@
                 }
             })
         }
-
 
         function conversaoRomano(){
             let milhar = $('#inputnumeralRomano').val();
@@ -180,5 +181,19 @@
             }
         }
 
+
+
+
+        function validarNumeral(){
+
+            let numero = $('#inputnumeral').val();
+
+            if (numero.length >7){
+                $('#inputnumeral').val(numero.slice(0, -1) + '');
+            }
+        }
     </script>
+
+
+
 @endsection
